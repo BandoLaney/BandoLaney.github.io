@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<head>
+  <title>Alana Babwah</title>
+  <style>
+    body {
+      
+      text-align: center;
+      background: url("https://t4.ftcdn.net/jpg/00/69/42/49/360_F_69424905_vxTpRGAcVKni9157VpKAOG6MpTX30etl.jpg");
+      background-size: cover;
+      background-position: center;
+      color: pink;
+      font-family: 'Glass Antiqua', cursive;
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,300;1,600&family=Cabin:wght@500&family=Caveat:wght@400;500;600&family=EB+Garamond&family=Glass+Antiqua&family=Londrina+Shadow&family=Merriweather&display=swap" rel="stylesheet">
+
+      }
+    p {
+      font-size: 23px;
+    }
+    input {
+      border: 0;
+      padding: 10px;
+      font-size: 18px;
+      font-family: 'Merriweather', serif;
+  
+    }
+    input[type="submit"] {
+      background: green;
+      color: blue;
+  
+    }
+    img {
+      border-radius: 50px;
+      }
+  </style>
+</head>
+<body>
+  <img src="https://i.pinimg.com/474x/eb/ed/af/ebedafce2cb775052824c5e405f645c4.jpg">
+  <p>Hi! I'm Lana, a badmon. Say hola</p>
+  <input id="Name" placeholder="Your name">
+		<input id="Email" type="email" placeholder="Your email">
+  <input id="submit" type="submit">
+		
+				<script type="module">
+		// Import the functions you need from the SDKs you need
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+		import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";
+	
+		// TODO: Add SDKs for Firebase products that you want to use
+		// https://firebase.google.com/docs/web/setup#available-libraries
+
+		// Your web app's Firebase configuration
+		// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+		const firebaseConfig = {
+		  apiKey: "AIzaSyAREdnPJfuIuwNsazRE38NJheQMLGOJzSQ",
+		  authDomain: "lana-8478c.firebaseapp.com",
+		  databaseURL: "https://lana-8478c-default-rtdb.firebaseio.com",
+		  projectId: "lana-8478c",
+		  storageBucket: "lana-8478c.appspot.com",
+		  messagingSenderId: "885887024854",
+		  appId: "1:885887024854:web:056be471bfe3c0b2889377",
+		  measurementId: "G-3QM156K8ME"
+		};
+
+		// Initialize Firebase
+				const app = initializeApp(firebaseConfig);
+				const db = getDatabase(app);
+    const Name = document.querySelector("#Name") 
+    const Email = document.querySelector("#Email")
+    document.querySelector('#submit').addEventListener('click', Submit)
+		
+		function Submit() {
+			  const timestamp = buildTimestamp()
+	  
+			  set(ref(db, timestamp), {
+				  Name: Name.value,
+			      email: Email.value,
+			  });
+					function buildTimestamp() {
+						  const now = new Date();
+						  let timestamp = now.getFullYear().toString() + "/";
+						  //const month = now.toLocaleString('default', { month: 'long' });
+
+						  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+						  month = month.toString()
+						  month = addLeadingZero(month)
+						  timestamp += month + "/"; 
+
+						  let date = now.getDate().toString()
+						  date = addLeadingZero(date)
+						  timestamp += date + "/";
+
+						  let hours = now.getHours().toString()
+						  hours = addLeadingZero(hours)
+						  timestamp += hours + ":";
+
+						  let minutes = now.getMinutes().toString()
+						  minutes = addLeadingZero(minutes)
+						  timestamp += minutes + ":";
+
+						  let seconds = now.getSeconds().toString()
+						  seconds = addLeadingZero(seconds)
+						  timestamp += seconds;
+  
+						  return timestamp
+						}
+	
+						function addLeadingZero(units) {
+							if (units.length < 2) {
+								units = "0" + units
+							}
+							return units
+						}
+
+			  Name.value = ""
+			  Email.value = ""
+			}
+	</script>
+			
+</body>
